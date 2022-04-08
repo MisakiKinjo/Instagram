@@ -143,7 +143,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                             let commentDic = [ "commenter": postData.name!, "comment": postData.comment!] as [String : Any]
                             let commentRef = Firestore.firestore().collection(Const.CommentPath).document(postData.id)
                             commentRef.setData(commentDic)
-                            
+                            self.tableView.reloadData()
                         }
                     }
                 )
