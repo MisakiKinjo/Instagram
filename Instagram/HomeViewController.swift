@@ -139,10 +139,10 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         title: "送信",
                         style: UIAlertAction.Style.default) { _ in
                         if let text = alertTextField?.text {
-                            postData.comment = text
-                            let commentDic = [ "commenter": postData.name!, "comment": postData.comment!] as [String : Any]
-                            let commentRef = Firestore.firestore().collection(Const.CommentPath).document(postData.id)
-                            commentRef.setData(commentDic)
+                            //postData.comment = "\(postData.name!) : \(text)"
+                            let commentDic = ["comment": "\(postData.name!) : \(text)"] as [String : Any]
+                            let commentRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+                            commentRef.updateData(commentDic)
                             self.tableView.reloadData()
                         }
                     }
