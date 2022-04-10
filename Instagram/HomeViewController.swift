@@ -140,9 +140,13 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
                         style: UIAlertAction.Style.default) { _ in
                         if let text = alertTextField?.text {
                             //postData.comment = "\(postData.name!) : \(text)"
-                            let commentDic = ["comment": "\(postData.name!) : \(text)"] as [String : Any]
+                            //let commentDic = ["comment": "\(postData.name!) : \(text)"] as [String : Any]
+                            let comment = "\(postData.name!) : \(text)"
+                                  let updateValue = FieldValue.arrayUnion([comment])
+
                             let commentRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
-                            commentRef.updateData(commentDic)
+                            //commentRef.updateData(commentDic)
+                            commentRef.updateData(["comment": updateValue])
                             self.tableView.reloadData()
                         }
                     }
